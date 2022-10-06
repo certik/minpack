@@ -25,6 +25,7 @@ if (CMAKE_Fortran_COMPILER_ID STREQUAL "GNU")
     #set(CMAKE_Fortran_FLAGS_DEBUG "${CMAKE_Fortran_FLAGS_DEBUG} -fdefault-real-8")
 endif ()
 
+enable_testing()
 
 add_subdirectory(examples)
 add_subdirectory(src)

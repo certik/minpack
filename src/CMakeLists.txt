@@ -9,7 +9,11 @@ set(SRC
     minpack.f90
 )
 
-add_definitions(-std=legacy -Wno-implicit-interface)
+if ($ENV{FC} STREQUAL "gfortran")
+    add_definitions(-std=legacy -Wno-implicit-interface)
+else()
+    add_definitions(--fixed-form --implicit-typing --allow-implicit-interface)
+endif()
 add_library(minpack ${SRC})
 install(TARGETS minpack
             RUNTIME DESTINATION bin

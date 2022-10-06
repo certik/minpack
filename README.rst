@@ -1,6 +1,8 @@
-This repository is now archived. The modern minpack development has moved to https://github.com/fortran-lang/minpack. 
+The modern minpack development has moved to https://github.com/fortran-lang/minpack. 
 
 See the issue https://github.com/fortran-lang/minpack/issues/8 for details about the move.
+
+This repository is using Minpack in the original fixed-form, and we use it to test the LFortran compiler with older F77 style code.
 
 
 Minpack

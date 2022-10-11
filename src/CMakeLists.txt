@@ -17,7 +17,7 @@ if (CMAKE_Fortran_COMPILER_ID STREQUAL "GNU")
         "-std=legacy;-Wno-implicit-interface;-Wno-unused-dummy-argument;-Wno-compare-reals;-Wno-do-subscript")
 else()
     set_source_files_properties(${SRC_F77} PROPERTIES COMPILE_OPTIONS
-        "--fixed-form;--implicit-typing;--allow-implicit-interface")
+        "--no-warnings;--fixed-form;--implicit-typing;--allow-implicit-interface")
 endif()
 add_library(minpack ${SRC})
 install(TARGETS minpack

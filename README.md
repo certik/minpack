@@ -1,4 +1,4 @@
-This branch is used for testing LFortran.
+This branch is used for testing LFortran. It contains code that is copied from SciPy, so once we can compile it, we can compile Minpack in SciPy.
 
 How to build with GFortran:
 ```

@@ -19,3 +19,9 @@ FC=lfortran cmake .
 make
 ctest
 ```
+
+When `make` fails with a missing mod file do:
+```
+cp src/CMakeFiles/minpack.dir/minpack.mod.stamp examples/minpack.mod
+```
+and rerun.

@@ -45,7 +45,7 @@ program example_hybrd
                mode, factor, nprint, info, nfev, fjac, ldfjac, &
                r, lr, qtf, wa1, wa2, wa3, wa4)
     fnorm = enorm(n, fvec)
-    write (nwrite, 1000) fnorm, nfev, info, (x(j), j=1, n)
+    write (nwrite, 1000) fnorm, nfev, info !, (x(j), j=1, n)
 
 1000 format(5x, "FINAL L2 NORM OF THE RESIDUALS", d15.7// &
            5x, "NUMBER OF FUNCTION EVALUATIONS", i10// &

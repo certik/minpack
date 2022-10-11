@@ -33,7 +33,7 @@ program example_hybrd1
 
     call hybrd1(fcn, n, x, fvec, tol, info, wa, lwa)
     fnorm = enorm(n, fvec)
-    write (nwrite, 1000) fnorm, info, (x(j), j=1, n)
+    write (nwrite, 1000) fnorm, info !, (x(j), j=1, n)
 
     err = abs((fnorm - 1.1926358347598092E-008_dp)/fnorm)
     eps = 2.2e-16_dp ! epsilon(1._dp)

@@ -47,7 +47,7 @@ program example_hybrd
                mode, factor, nprint, info, nfev, fjac, ldfjac, &
                r, lr, qtf, wa1, wa2, wa3, wa4)
     fnorm = enorm(n, fvec)
-    write (nwrite, 1000) fnorm, nfev, info, (x(j), j=1, n)
+    write (nwrite, 1000) fnorm, nfev, info !, (x(j), j=1, n)
     print *, fnorm, nfev, info
     print *, "Computed:"
     print *, x

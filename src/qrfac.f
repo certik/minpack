@@ -81,7 +81,7 @@ c
 c     **********
       integer i,j,jp1,k,kmax,minmn
       double precision ajnorm,epsmch,one,p05,sum,temp,zero
-      double precision dpmpar,enorm
+      external dpmpar,enorm
       data one,p05,zero /1.0d0,5.0d-2,0.0d0/
 c
 c     epsmch is the machine precision.

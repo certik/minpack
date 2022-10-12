@@ -123,7 +123,7 @@ c
 c        computation of banded approximate jacobian.
 c
          do 90 k = 1, msum
-            do 60 j = k, n, msum
+            do 60 j = k, n, 1
                wa2(j) = x(j)
                h = eps*dabs(wa2(j))
                if (h .eq. zero) h = eps
@@ -131,7 +131,7 @@ c
    60          continue
             call fcn(n,x,wa1,iflag)
             if (iflag .lt. 0) go to 100
-            do 80 j = k, n, msum
+            do 80 j = k, n, 1
                x(j) = wa2(j)
                h = eps*dabs(wa2(j))
                if (h .eq. zero) h = eps

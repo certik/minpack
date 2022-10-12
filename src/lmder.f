@@ -1,5 +1,5 @@
       recursive
-     *subroutine lmder(fcn,m,n,x,fvec,fjac,ldfjac,ftol,xtol,gtol,
+     *subroutine lmder(m,n,x,fvec,fjac,ldfjac,ftol,xtol,gtol,
      *                 maxfev,diag,mode,factor,nprint,info,nfev,njev,
      *                 ipvt,qtf,wa1,wa2,wa3,wa4)
       integer m,n,ldfjac,maxfev,mode,nprint,info,nfev,njev
@@ -7,6 +7,7 @@
       double precision ftol,xtol,gtol,factor
       double precision x(n),fvec(m),fjac(ldfjac,n),diag(n),qtf(n),
      *                 wa1(n),wa2(n),wa3(n),wa4(m)
+      external fcn
 c     **********
 c
 c     subroutine lmder

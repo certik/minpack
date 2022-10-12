@@ -42,14 +42,12 @@ c     **********
      *                 one,prod,s2,temp,ten,three,ti,tmp1,tmp2,tmp3,
      *                 tmp4,tpi,two,zero
       double precision v(11)
-      double precision real
       data zero,one,two,three,four,five,eight,ten,c14,c20,c29,c45,c100
      *     /0.0d0,1.0d0,2.0d0,3.0d0,4.0d0,5.0d0,8.0d0,1.0d1,1.4d1,
      *      2.0d1,2.9d1,4.5d1,1.0d2/
       data v(1),v(2),v(3),v(4),v(5),v(6),v(7),v(8),v(9),v(10),v(11)
      *     /4.0d0,2.0d0,1.0d0,5.0d-1,2.5d-1,1.67d-1,1.25d-1,1.0d-1,
      *      8.33d-2,7.14d-2,6.25d-2/
-      real(ivar) = ivar
 c
 c     jacobian routine selector.
 c

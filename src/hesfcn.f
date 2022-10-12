@@ -48,7 +48,6 @@ c     **********
      *                 t2,t3,ten,th,three,tpi,twenty,two,zero
       double precision d3,r1,r2,r3,u1,u2,v,v1,v2
       double precision fvec(50),fvec1(50),y(15)
-      double precision real
       double precision six,xnine,twelve,c120,c200p2,c202,c220p2,c360,
      *                 c400,c1200
       data six,xnine,twelve,c120,c200p2,c202,c220p2,c360,c400,c1200
@@ -67,7 +66,6 @@ c     **********
      *     /9.0d-4,4.4d-3,1.75d-2,5.4d-2,1.295d-1,2.42d-1,3.521d-1,
      *      3.989d-1,3.521d-1,2.42d-1,1.295d-1,5.4d-2,1.75d-2,4.4d-3,
      *      9.0d-4/
-      real(ivar) = ivar
 c
 c     hessian routine selector.
 c

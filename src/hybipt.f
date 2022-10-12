@@ -37,9 +37,7 @@ c
 c     **********
       integer ivar,j
       double precision c1,h,half,one,three,tj,zero
-      double precision dfloat
       data zero,half,one,three,c1 /0.0d0,5.0d-1,1.0d0,3.0d0,1.2d0/
-      dfloat(ivar) = ivar
 c
 c     selection of initial point.
 c
@@ -96,9 +94,9 @@ c
 c     chebyquad function.
 c
    80 continue
-      h = one/dfloat(n+1)
+      h = one/real(n+1)
       do 90 j = 1, n
-         x(j) = dfloat(j)*h
+         x(j) = real(j)*h
    90    continue
       go to 200
 c
@@ -113,9 +111,9 @@ c
 c     discrete boundary value and integral equation functions.
 c
   120 continue
-      h = one/dfloat(n+1)
+      h = one/real(n+1)
       do 130 j = 1, n
-         tj = dfloat(j)*h
+         tj = real(j)*h
          x(j) = tj*(tj - one)
   130    continue
       go to 200
@@ -123,7 +121,7 @@ c
 c     trigonometric function.
 c
   140 continue
-      h = one/dfloat(n)
+      h = one/real(n)
       do 150 j = 1, n
          x(j) = h
   150    continue
@@ -132,9 +130,9 @@ c
 c     variably dimensioned function.
 c
   160 continue
-      h = one/dfloat(n)
+      h = one/real(n)
       do 170 j = 1, n
-         x(j) = one - dfloat(j)*h
+         x(j) = one - real(j)*h
   170    continue
       go to 200
 c

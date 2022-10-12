@@ -40,13 +40,13 @@ c     **********
       double precision c1,c2,c3,c4,c5,c6,c7,c8,c9,eight,five,h,one,
      *                 prod,sum,sum1,sum2,temp,temp1,temp2,ten,three,
      *                 ti,tj,tk,tpi,two,zero
-      double precision dfloat
+      double precision real
       data zero,one,two,three,five,eight,ten
      *     /0.0d0,1.0d0,2.0d0,3.0d0,5.0d0,8.0d0,1.0d1/
       data c1,c2,c3,c4,c5,c6,c7,c8,c9
      *     /1.0d4,1.0001d0,2.0d2,2.02d1,1.98d1,1.8d2,2.5d-1,5.0d-1,
      *      2.9d1/
-      dfloat(ivar) = ivar
+      real(ivar) = ivar
 c
 c     problem selector.
 c
@@ -106,11 +106,11 @@ c
          fvec(k) = zero
    70    continue
       do 110 i = 1, 29
-         ti = dfloat(i)/c9
+         ti = real(i)/c9
          sum1 = zero
          temp = one
          do 80 j = 2, n
-            sum1 = sum1 + dfloat(j-1)*temp*x(j)
+            sum1 = sum1 + real(j-1)*temp*x(j)
             temp = ti*temp
    80       continue
          sum2 = zero
@@ -123,7 +123,7 @@ c
          temp2 = two*ti*sum2
          temp = one/ti
          do 100 k = 1, n
-            fvec(k) = fvec(k) + temp*(dfloat(k-1) - temp2)*temp1
+            fvec(k) = fvec(k) + temp*(real(k-1) - temp2)*temp1
             temp = ti*temp
   100       continue
   110    continue
@@ -149,11 +149,11 @@ c
             temp2 = ti
   140       continue
   150    continue
-      tk = one/dfloat(n)
+      tk = one/real(n)
       iev = -1
       do 160 k = 1, n
          fvec(k) = tk*fvec(k)
-         if (iev .gt. 0) fvec(k) = fvec(k) + one/(dfloat(k)**2 - one)
+         if (iev .gt. 0) fvec(k) = fvec(k) + one/(real(k)**2 - one)
          iev = -iev
   160    continue
       go to 380
@@ -161,7 +161,7 @@ c
 c     brown almost-linear function.
 c
   170 continue
-      sum = -dfloat(n+1)
+      sum = -real(n+1)
       prod = one
       do 180 j = 1, n
          sum = sum + x(j)
@@ -176,9 +176,9 @@ c
 c     discrete boundary value function.
 c
   200 continue
-      h = one/dfloat(n+1)
+      h = one/real(n+1)
       do 210 k = 1, n
-         temp = (x(k) + dfloat(k)*h + one)**3
+         temp = (x(k) + real(k)*h + one)**3
          temp1 = zero
          if (k .ne. 1) temp1 = x(k-1)
          temp2 = zero
@@ -190,12 +190,12 @@ c
 c     discrete integral equation function.
 c
   220 continue
-      h = one/dfloat(n+1)
+      h = one/real(n+1)
       do 260 k = 1, n
-         tk = dfloat(k)*h
+         tk = real(k)*h
          sum1 = zero
          do 230 j = 1, k
-            tj = dfloat(j)*h
+            tj = real(j)*h
             temp = (x(j) + tj + one)**3
             sum1 = sum1 + tj*temp
   230       continue
@@ -203,7 +203,7 @@ c
          kp1 = k + 1
          if (n .lt. kp1) go to 250
          do 240 j = kp1, n
-            tj = dfloat(j)*h
+            tj = real(j)*h
             temp = (x(j) + tj + one)**3
             sum2 = sum2 + (one - tj)*temp
   240       continue
@@ -221,7 +221,7 @@ c
          sum = sum + fvec(j)
   280    continue
       do 290 k = 1, n
-         fvec(k) = dfloat(n+k) - dsin(x(k)) - sum - dfloat(k)*fvec(k)
+         fvec(k) = real(n+k) - dsin(x(k)) - sum - real(k)*fvec(k)
   290    continue
       go to 380
 c
@@ -230,11 +230,11 @@ c
   300 continue
       sum = zero
       do 310 j = 1, n
-         sum = sum + dfloat(j)*(x(j) - one)
+         sum = sum + real(j)*(x(j) - one)
   310    continue
       temp = sum*(one + two*sum**2)
       do 320 k = 1, n
-         fvec(k) = x(k) - one + dfloat(k)*temp
+         fvec(k) = x(k) - one + real(k)*temp
   320    continue
       go to 380
 c

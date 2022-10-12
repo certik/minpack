@@ -48,7 +48,7 @@ c     **********
      *                 t2,t3,ten,th,three,tpi,twenty,two,zero
       double precision d3,r1,r2,r3,u1,u2,v,v1,v2
       double precision fvec(50),fvec1(50),y(15)
-      double precision dfloat
+      double precision real
       double precision six,xnine,twelve,c120,c200p2,c202,c220p2,c360,
      *                 c400,c1200
       data six,xnine,twelve,c120,c200p2,c202,c220p2,c360,c400,c1200
@@ -67,7 +67,7 @@ c     **********
      *     /9.0d-4,4.4d-3,1.75d-2,5.4d-2,1.295d-1,2.42d-1,3.521d-1,
      *      3.989d-1,3.521d-1,2.42d-1,1.295d-1,5.4d-2,1.75d-2,4.4d-3,
      *      9.0d-4/
-      dfloat(ivar) = ivar
+      real(ivar) = ivar
 c
 c     hessian routine selector.
 c
@@ -106,7 +106,7 @@ c
    30       continue
    40    continue
       do 50 i = 1, 13
-         d1 = dfloat(i)/ten
+         d1 = real(i)/ten
          d2 = dexp(-d1) - five*dexp(-ten*d1) + three*dexp(-four*d1)
          s1 = dexp(-d1*x(1))
          s2 = dexp(-d1*x(2))
@@ -167,7 +167,7 @@ c
    70       continue
    80    continue
       do 90 i = 1, 15
-         d1 = cp5*dfloat(i-1)
+         d1 = cp5*real(i-1)
          d2 = c3p5 - d1 - x(3)
          arg = -cp5*x(2)*d2**2
          r = dexp(arg)
@@ -212,7 +212,7 @@ c
   120       continue
   130    continue
       do 140 i = 1, 10
-         d1 = dfloat(i)
+         d1 = real(i)
          d2 = d1/ten
          s1 = dexp(-d2*x(1))
          s2 = dexp(-d2*x(2))
@@ -240,13 +240,13 @@ c
   170 continue
       t1 = zero
       do 180 j = 1, n
-         t1 = t1 + dfloat(j)*(x(j) - one)
+         t1 = t1 + real(j)*(x(j) - one)
   180    continue
 c     t = t1*(one + two*t1**2)
       t2 = two + twelve*t1**2
       do 200 j = 1, n
          do 190 i = 1, j
-            h(i,j) = dfloat(i*j)*t2
+            h(i,j) = real(i*j)*t2
   190       continue
          h(j,j) = h(j,j) + two
   200    continue
@@ -261,11 +261,11 @@ c
   220       continue
   230    continue
       do 280 i = 1, 29
-         d1 = dfloat(i)/c29
+         d1 = real(i)/c29
          s1 = zero
          d2 = one
          do 240 j = 2, n
-            s1 = s1 + dfloat(j-1)*d2*x(j)
+            s1 = s1 + real(j-1)*d2*x(j)
             d2 = d1*d2
   240       continue
          s2 = zero
@@ -279,10 +279,10 @@ c
          d2 = two/d1
          th = two*d1**2*t
          do 270 j = 1, n
-            v = dfloat(j-1) - s3
+            v = real(j-1) - s3
             d3 = one/d1
             do 260 k = 1, j
-               h(k,j) = h(k,j) + d2*d3*(v*(dfloat(k-1) - s3) - th)
+               h(k,j) = h(k,j) + d2*d3*(v*(real(k-1) - s3) - th)
                d3 = d1*d3
   260          continue
             d2 = d1*d2
@@ -317,17 +317,17 @@ c
   330 continue
       t1 = -one
       do 340 j = 1, n
-         t1 = t1 + dfloat(n-j+1)*x(j)**2
+         t1 = t1 + real(n-j+1)*x(j)**2
   340    continue
       d1 = dexp(cp1)
       d2 = one
       th = four*t1
       do 370 j = 1, n
-         t2 = eight*dfloat(n-j+1)*x(j)
+         t2 = eight*real(n-j+1)*x(j)
          do 350 i = 1, j
-            h(i,j) = dfloat(n-i+1)*x(i)*t2
+            h(i,j) = real(n-i+1)*x(i)*t2
   350       continue
-         h(j,j) = h(j,j) + dfloat(n-j+1)*th
+         h(j,j) = h(j,j) + real(n-j+1)*th
          s1 = dexp(x(j)/ten)
          if (j .eq. 1) go to 360
          s3 = s1 + s2 - d2*(d1 + one)
@@ -361,7 +361,7 @@ c
   400       continue
   410    continue
       do 420 i = 1, 20
-         d1 = dfloat(i)/five
+         d1 = real(i)/five
          d2 = dsin(d1)
          t1 = x(1) + d1*x(2) - dexp(d1)
          t2 = x(3) + d2*x(4) - dcos(d1)
@@ -399,7 +399,7 @@ c
   470    continue
       d1 = two/three
       do 480 i = 1, 99
-         arg = dfloat(i)/c100
+         arg = real(i)/c100
          r = (-fifty*dlog(arg))**d1 + c25 - x(2)
          t1 = dabs(r)**x(3)/x(1)
          t2 = dexp(-t1)
@@ -439,43 +439,43 @@ c
   500    continue
   510 continue
       v2 = dsin(x(n))
-      s2 = dfloat(2*n) - v2 - s1 - dfloat(n)*u2
-      r2 = dfloat(2*n)*v2 - u2
+      s2 = real(2*n) - v2 - s1 - real(n)*u2
+      r2 = real(2*n)*v2 - u2
       if (n .eq. 1) go to 570
       v1 = dsin(x(n-1))
-      s2 = s2 + dfloat(2*n-1) - v1 - s1 - dfloat(n-1)*u1
-      r1 = dfloat(2*n-1)*v1 - u1
+      s2 = s2 + real(2*n-1) - v1 - s1 - real(n-1)*u1
+      r1 = real(2*n-1)*v1 - u1
       if (n .eq. 2) go to 560
       do 520 j = 1, n2
          h(j,n) = dsin(x(j))
-         t = dfloat(n+j) - h(j,n) - s1 - dfloat(j)*h(j,n-1)
+         t = real(n+j) - h(j,n) - s1 - real(j)*h(j,n-1)
          s2 = s2 + t
   520    continue
       do 540 j = 1, n2
-         v = dfloat(j)*h(j,n-1) + h(j,n)
-         t = dfloat(n+j) - s1 - v
-         t1 = dfloat(n+j)*h(j,n) - h(j,n-1)
+         v = real(j)*h(j,n-1) + h(j,n)
+         t = real(n+j) - s1 - v
+         t1 = real(n+j)*h(j,n) - h(j,n-1)
          do 530 i = 1, j
-            th = dfloat(i)*h(i,n) - h(i,n-1)
+            th = real(i)*h(i,n) - h(i,n-1)
             h(i,j) = two*(h(i,n)*t1 + h(j,n)*th)
   530       continue
          h(j,j) = h(j,j) + two*(h(j,n-1)*s2 + v*t + th**2)
   540    continue
       do 550 i = 1, n2
-         th = dfloat(i)*h(i,n) - h(i,n-1)
+         th = real(i)*h(i,n) - h(i,n-1)
          h(i,n-1) = two*(h(i,n)*r1 + v1*th)
          h(i,n) = two*(h(i,n)*r2 + v2*th)
   550    continue
   560 continue
-      v = dfloat(n-1)*u1 + v1
-      t = dfloat(2*n-1) - s1 - v
-      th = dfloat(n-1)*v1 - u1
+      v = real(n-1)*u1 + v1
+      t = real(2*n-1) - s1 - v
+      th = real(n-1)*v1 - u1
       h(n-1,n-1) = two*(v1*(r1 + th) + u1*s2 + v*t + th**2)
       h(n-1,n) = two*(v1*r2 + v2*th)
   570 continue
-      v = dfloat(n)*u2 + v2
-      t = dfloat(2*n) - s1 - v
-      th = dfloat(n)*v2 - u2
+      v = real(n)*u2 + v2
+      t = real(2*n) - s1 - v
+      th = real(n)*v2 - u2
       h(n,n) = two*(v2*(r2 + th) + u2*s2 + v*t + th**2)
       go to 800
 c
@@ -580,11 +580,11 @@ c
             t2 = th
   700       continue
   710    continue
-      d1 = one/dfloat(n)
+      d1 = one/real(n)
       iev = -1
       do 720 i = 1, n
          fvec(i) = d1*fvec(i)
-         if (iev .gt. 0) fvec(i) = fvec(i) + one/(dfloat(i)**2 - one)
+         if (iev .gt. 0) fvec(i) = fvec(i) + one/(real(i)**2 - one)
          iev = -iev
   720    continue
       do 770 j = 1, n

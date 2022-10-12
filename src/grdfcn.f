@@ -42,7 +42,7 @@ c     **********
      *                 four,one,r,s1,s2,s3,t,t1,t2,t3,ten,th,three,
      *                 tpi,twenty,two,zero
       double precision fvec(50),y(15)
-      double precision dfloat
+      double precision real
       data zero,one,two,three,four,five,eight,ten,twenty,fifty
      *     /0.0d0,1.0d0,2.0d0,3.0d0,4.0d0,5.0d0,8.0d0,1.0d1,2.0d1,
      *      5.0d1/
@@ -57,7 +57,7 @@ c     **********
      *     /9.0d-4,4.4d-3,1.75d-2,5.4d-2,1.295d-1,2.42d-1,3.521d-1,
      *      3.989d-1,3.521d-1,2.42d-1,1.295d-1,5.4d-2,1.75d-2,4.4d-3,
      *      9.0d-4/
-      dfloat(ivar) = ivar
+      real(ivar) = ivar
 c
 c     gradient routine selector.
 c
@@ -87,7 +87,7 @@ c
          g(j) = zero
    30    continue
       do 40 i = 1, 13
-         d1 = dfloat(i)/ten
+         d1 = real(i)/ten
          d2 = dexp(-d1) - five*dexp(-ten*d1) + three*dexp(-four*d1)
          s1 = dexp(-d1*x(1))
          s2 = dexp(-d1*x(2))
@@ -116,7 +116,7 @@ c
       g(2) = zero
       g(3) = zero
       do 60 i = 1, 15
-         d1 = cp5*dfloat(i-1)
+         d1 = cp5*real(i-1)
          d2 = c3p5 - d1 - x(3)
          arg = -cp5*x(2)*d2**2
          r = dexp(arg)
@@ -150,7 +150,7 @@ c
       g(2) = zero
       g(3) = zero
       do 90 i = 1, 10
-         d1 = dfloat(i)
+         d1 = real(i)
          d2 = d1/ten
          s1 = dexp(-d2*x(1))
          s2 = dexp(-d2*x(2))
@@ -171,11 +171,11 @@ c
   100 continue
       t1 = zero
       do 110 j = 1, n
-         t1 = t1 + dfloat(j)*(x(j) - one)
+         t1 = t1 + real(j)*(x(j) - one)
   110    continue
       t = t1*(one + two*t1**2)
       do 120 j = 1, n
-         g(j) = two*(x(j) - one + dfloat(j)*t)
+         g(j) = two*(x(j) - one + real(j)*t)
   120    continue
       go to 490
 c
@@ -186,11 +186,11 @@ c
          g(j) = zero
   140    continue
       do 180 i = 1, 29
-         d1 = dfloat(i)/c29
+         d1 = real(i)/c29
          s1 = zero
          d2 = one
          do 150 j = 2, n
-            s1 = s1 + dfloat(j-1)*d2*x(j)
+            s1 = s1 + real(j-1)*d2*x(j)
             d2 = d1*d2
   150       continue
          s2 = zero
@@ -203,7 +203,7 @@ c
          s3 = two*d1*s2
          d2 = two/d1
          do 170 j = 1, n
-            g(j) = g(j) + d2*(dfloat(j-1) - s3)*t
+            g(j) = g(j) + d2*(real(j-1) - s3)*t
             d2 = d1*d2
   170       continue
   180    continue
@@ -231,13 +231,13 @@ c
   220 continue
       t1 = -one
       do 230 j = 1, n
-         t1 = t1 + dfloat(n-j+1)*x(j)**2
+         t1 = t1 + real(n-j+1)*x(j)**2
   230    continue
       d1 = dexp(cp1)
       d2 = one
       th = four*t1
       do 250 j = 1, n
-         g(j) = dfloat(n-j+1)*x(j)*th
+         g(j) = real(n-j+1)*x(j)*th
          s1 = dexp(x(j)/ten)
          if (j .eq. 1) go to 240
          s3 = s1 + s2 - d2*(d1 + one)
@@ -268,7 +268,7 @@ c
       g(3) = zero
       g(4) = zero
       do 280 i = 1, 20
-         d1 = dfloat(i)/five
+         d1 = real(i)/five
          d2 = dsin(d1)
          t1 = x(1) + d1*x(2) - dexp(d1)
          t2 = x(3) + d2*x(4) - dcos(d1)
@@ -294,7 +294,7 @@ c
       g(3) = zero
       d1 = two/three
       do 300 i = 1, 99
-         arg = dfloat(i)/c100
+         arg = real(i)/c100
          r = (-fifty*dlog(arg))**d1 + c25 - x(2)
          t1 = dabs(r)**x(3)/x(1)
          t2 = dexp(-t1)
@@ -320,9 +320,9 @@ c
       s2 = zero
       do 330 j = 1, n
          th = dsin(x(j))
-         t = dfloat(n+j) - th - s1 - dfloat(j)*g(j)
+         t = real(n+j) - th - s1 - real(j)*g(j)
          s2 = s2 + t
-         g(j) = (dfloat(j)*th - g(j))*t
+         g(j) = (real(j)*th - g(j))*t
   330    continue
       do 340 j = 1, n
          g(j) = two*(g(j) + dsin(x(j))*s2)
@@ -402,11 +402,11 @@ c
             t2 = th
   430       continue
   440    continue
-      d1 = one/dfloat(n)
+      d1 = one/real(n)
       iev = -1
       do 450 i = 1, n
          fvec(i) = d1*fvec(i)
-         if (iev .gt. 0) fvec(i) = fvec(i) + one/(dfloat(i)**2 - one)
+         if (iev .gt. 0) fvec(i) = fvec(i) + one/(real(i)**2 - one)
          iev = -iev
   450    continue
       do 470 j = 1, n

@@ -49,7 +49,7 @@ c     **********
      *                 s1,s2,temp,ten,ti,tmp1,tmp2,tmp3,tmp4,tpi,two,
      *                 zero,zp25,zp5
       double precision v(11),y1(15),y2(11),y3(16),y4(33),y5(65)
-      double precision dfloat
+      double precision real
       data zero,zp25,zp5,one,two,five,eight,ten,c13,c14,c29,c45
      *     /0.0d0,2.5d-1,5.0d-1,1.0d0,2.0d0,5.0d0,8.0d0,1.0d1,1.3d1,
      *      1.4d1,2.9d1,4.5d1/
@@ -96,7 +96,7 @@ c     **********
      *      6.32d-1,5.91d-1,5.59d-1,5.97d-1,6.25d-1,7.39d-1,7.1d-1,
      *      7.29d-1,7.2d-1,6.36d-1,5.81d-1,4.28d-1,2.92d-1,1.62d-1,
      *      9.8d-2,5.4d-2/
-      dfloat(ivar) = ivar
+      real(ivar) = ivar
 c
 c     function routine selector.
 c
@@ -110,7 +110,7 @@ c
       do 20 j = 1, n
          sum = sum + x(j)
    20    continue
-      temp = two*sum/dfloat(m) + one
+      temp = two*sum/real(m) + one
       do 30 i = 1, m
          fvec(i) = -temp
          if (i .le. n) fvec(i) = fvec(i) + x(i)
@@ -122,10 +122,10 @@ c
    40 continue
       sum = zero
       do 50 j = 1, n
-         sum = sum + dfloat(j)*x(j)
+         sum = sum + real(j)*x(j)
    50    continue
       do 60 i = 1, m
-         fvec(i) = dfloat(i)*sum - one
+         fvec(i) = real(i)*sum - one
    60    continue
       go to 430
 c
@@ -136,11 +136,11 @@ c
       nm1 = n - 1
       if (nm1 .lt. 2) go to 90
       do 80 j = 2, nm1
-         sum = sum + dfloat(j)*x(j)
+         sum = sum + real(j)*x(j)
    80    continue
    90 continue
       do 100 i = 1, m
-         fvec(i) = dfloat(i-1)*sum - one
+         fvec(i) = real(i-1)*sum - one
   100    continue
       fvec(m) = -one
       go to 430
@@ -185,8 +185,8 @@ c     bard function.
 c
   150 continue
       do 160 i = 1, 15
-         tmp1 = dfloat(i)
-         tmp2 = dfloat(16-i)
+         tmp1 = real(i)
+         tmp2 = real(16-i)
          tmp3 = tmp1
          if (i .gt. 8) tmp3 = tmp2
          fvec(i) = y1(i) - (x(1) + tmp1/(x(2)*tmp2 + x(3)*tmp3))
@@ -207,7 +207,7 @@ c     meyer function.
 c
   190 continue
       do 200 i = 1, 16
-         temp = five*dfloat(i) + c45 + x(3)
+         temp = five*real(i) + c45 + x(3)
          tmp1 = x(2)/temp
          tmp2 = dexp(tmp1)
          fvec(i) = x(1)*tmp2 - y3(i)
@@ -218,11 +218,11 @@ c     watson function.
 c
   210 continue
       do 240 i = 1, 29
-         div = dfloat(i)/c29
+         div = real(i)/c29
          s1 = zero
          dx = one
          do 220 j = 2, n
-            s1 = s1 + dfloat(j-1)*dx*x(j)
+            s1 = s1 + real(j-1)*dx*x(j)
             dx = div*dx
   220       continue
          s2 = zero
@@ -241,7 +241,7 @@ c     box 3-dimensional function.
 c
   250 continue
       do 260 i = 1, m
-         temp = dfloat(i)
+         temp = real(i)
          tmp1 = temp/ten
          fvec(i) = dexp(-tmp1*x(1)) - dexp(-tmp1*x(2))
      *             + (dexp(-temp) - dexp(-tmp1))*x(3)
@@ -252,7 +252,7 @@ c     jennrich and sampson function.
 c
   270 continue
       do 280 i = 1, m
-         temp = dfloat(i)
+         temp = real(i)
          fvec(i) = two + two*temp - dexp(temp*x(1)) - dexp(temp*x(2))
   280    continue
       go to 430
@@ -261,7 +261,7 @@ c     brown and dennis function.
 c
   290 continue
       do 300 i = 1, m
-         temp = dfloat(i)/five
+         temp = real(i)/five
          tmp1 = x(1) + temp*x(2) - dexp(temp)
          tmp2 = x(3) + dsin(temp)*x(4) - dcos(temp)
          fvec(i) = tmp1**2 + tmp2**2
@@ -285,11 +285,11 @@ c
             tmp2 = ti
   330       continue
   340    continue
-      dx = one/dfloat(n)
+      dx = one/real(n)
       iev = -1
       do 350 i = 1, m
          fvec(i) = dx*fvec(i)
-         if (iev .gt. 0) fvec(i) = fvec(i) + one/(dfloat(i)**2 - one)
+         if (iev .gt. 0) fvec(i) = fvec(i) + one/(real(i)**2 - one)
          iev = -iev
   350    continue
       go to 430
@@ -297,7 +297,7 @@ c
 c     brown almost-linear function.
 c
   360 continue
-      sum = -dfloat(n+1)
+      sum = -real(n+1)
       prod = one
       do 370 j = 1, n
          sum = sum + x(j)
@@ -313,7 +313,7 @@ c     osborne 1 function.
 c
   390 continue
       do 400 i = 1, 33
-         temp = ten*dfloat(i-1)
+         temp = ten*real(i-1)
          tmp1 = dexp(-x(4)*temp)
          tmp2 = dexp(-x(5)*temp)
          fvec(i) = y4(i) - (x(1) + x(2)*tmp1 + x(3)*tmp2)
@@ -324,7 +324,7 @@ c     osborne 2 function.
 c
   410 continue
       do 420 i = 1, 65
-         temp = dfloat(i-1)/ten
+         temp = real(i-1)/ten
          tmp1 = dexp(-x(5)*temp)
          tmp2 = dexp(-x(6)*(temp-x(9))**2)
          tmp3 = dexp(-x(7)*(temp-x(10))**2)

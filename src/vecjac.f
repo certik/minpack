@@ -42,13 +42,11 @@ c     **********
      *                 hundrd,one,prod,six,sum,sum1,sum2,temp,temp1,
      *                 temp2,temp3,temp4,ten,three,ti,tj,tk,tpi,
      *                 twenty,two,zero
-      double precision dfloat
       data zero,one,two,three,four,five,six,eight,ten,fiftn,twenty,
      *     hundrd
      *     /0.0d0,1.0d0,2.0d0,3.0d0,4.0d0,5.0d0,6.0d0,8.0d0,1.0d1,
      *      1.5d1,2.0d1,1.0d2/
       data c1,c3,c4,c5,c6,c9 /1.0d4,2.0d2,2.02d1,1.98d1,1.8d2,2.9d1/
-      dfloat(ivar) = ivar
 c
 c     jacobian routine selector.
 c
@@ -140,11 +138,11 @@ c
   110       continue
   120    continue
       do 170 i = 1, 29
-         ti = dfloat(i)/c9
+         ti = real(i)/c9
          sum1 = zero
          temp = one
          do 130 j = 2, n
-            sum1 = sum1 + dfloat(j-1)*temp*x(j)
+            sum1 = sum1 + real(j-1)*temp*x(j)
             temp = ti*temp
   130       continue
          sum2 = zero
@@ -162,8 +160,8 @@ c
             do 150 j = k, n
                fjac(k,j) = fjac(k,j)
      *                     + tj
-     *                       *((dfloat(k-1)/ti - temp2)
-     *                         *(dfloat(j-1)/ti - temp2) - temp1)
+     *                       *((real(k-1)/ti - temp2)
+     *                         *(real(j-1)/ti - temp2) - temp1)
                tj = ti*tj
   150          continue
             tk = temp*tk
@@ -182,7 +180,7 @@ c
 c     chebyquad function.
 c
   200 continue
-      tk = one/dfloat(n)
+      tk = one/real(n)
       do 220 j = 1, n
          temp1 = one
          temp2 = two*x(j) - one
@@ -228,9 +226,9 @@ c
 c     discrete boundary value function.
 c
   290 continue
-      h = one/dfloat(n+1)
+      h = one/real(n+1)
       do 310 k = 1, n
-         temp = three*(x(k) + dfloat(k)*h + one)**2
+         temp = three*(x(k) + real(k)*h + one)**2
          do 300 j = 1, n
             fjac(k,j) = zero
   300       continue
@@ -243,11 +241,11 @@ c
 c     discrete integral equation function.
 c
   320 continue
-      h = one/dfloat(n+1)
+      h = one/real(n+1)
       do 340 k = 1, n
-         tk = dfloat(k)*h
+         tk = real(k)*h
          do 330 j = 1, n
-            tj = dfloat(j)*h
+            tj = real(j)*h
             temp = three*(x(j) + tj + one)**2
             fjac(k,j) = h*dmin1(tj*(one-tk),tk*(one-tj))*temp/two
   330       continue
@@ -263,7 +261,7 @@ c
          do 360 k = 1, n
             fjac(k,j) = temp
   360       continue
-         fjac(j,j) = dfloat(j+1)*temp - dcos(x(j))
+         fjac(j,j) = real(j+1)*temp - dcos(x(j))
   370    continue
       go to 490
 c
@@ -272,12 +270,12 @@ c
   380 continue
       sum = zero
       do 390 j = 1, n
-         sum = sum + dfloat(j)*(x(j) - one)
+         sum = sum + real(j)*(x(j) - one)
   390    continue
       temp = one + six*sum**2
       do 410 k = 1, n
          do 400 j = k, n
-            fjac(k,j) = dfloat(k*j)*temp
+            fjac(k,j) = real(k*j)*temp
             fjac(j,k) = fjac(k,j)
   400       continue
          fjac(k,k) = fjac(k,k) + one

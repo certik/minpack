@@ -38,11 +38,9 @@ c     **********
       integer ivar,j
       double precision c1,c2,c3,c4,five,h,half,one,ten,three,twenty,
      *                 twntf,two,zero
-      double precision dfloat
       data zero,half,one,two,three,five,ten,twenty,twntf
      *     /0.0d0,0.5d0,1.0d0,2.0d0,3.0d0,5.0d0,1.0d1,2.0d1,2.5d1/
       data c1,c2,c3,c4 /4.0d-1,2.5d0,1.5d-1,1.2d0/
-      dfloat(ivar) = ivar
 c
 c     selection of initial point.
 c
@@ -94,9 +92,9 @@ c
 c     variably dimensioned function.
 c
    60 continue
-      h = one/dfloat(n)
+      h = one/real(n)
       do 70 j = 1, n
-         x(j) = one - dfloat(j)*h
+         x(j) = one - real(j)*h
    70    continue
       go to 270
 c
@@ -112,7 +110,7 @@ c     penalty function i.
 c
   100 continue
       do 110 j = 1, n
-         x(j) = dfloat(j)
+         x(j) = real(j)
   110    continue
       go to 270
 c
@@ -151,7 +149,7 @@ c
 c     trigonometric function.
 c
   170 continue
-      h = one/dfloat(n)
+      h = one/real(n)
       do 180 j = 1, n
          x(j) = h
   180    continue
@@ -196,9 +194,9 @@ c
 c     chebyquad function.
 c
   250 continue
-      h = one/dfloat(n+1)
+      h = one/real(n+1)
       do 260 j = 1, n
-         x(j) = dfloat(j)*h
+         x(j) = real(j)*h
   260    continue
   270 continue
 c

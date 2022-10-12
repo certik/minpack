@@ -42,14 +42,14 @@ c     **********
      *                 one,prod,s2,temp,ten,three,ti,tmp1,tmp2,tmp3,
      *                 tmp4,tpi,two,zero
       double precision v(11)
-      double precision dfloat
+      double precision real
       data zero,one,two,three,four,five,eight,ten,c14,c20,c29,c45,c100
      *     /0.0d0,1.0d0,2.0d0,3.0d0,4.0d0,5.0d0,8.0d0,1.0d1,1.4d1,
      *      2.0d1,2.9d1,4.5d1,1.0d2/
       data v(1),v(2),v(3),v(4),v(5),v(6),v(7),v(8),v(9),v(10),v(11)
      *     /4.0d0,2.0d0,1.0d0,5.0d-1,2.5d-1,1.67d-1,1.25d-1,1.0d-1,
      *      8.33d-2,7.14d-2,6.25d-2/
-      dfloat(ivar) = ivar
+      real(ivar) = ivar
 c
 c     jacobian routine selector.
 c
@@ -59,7 +59,7 @@ c
 c     linear function - full rank.
 c
    10 continue
-      temp = two/dfloat(m)
+      temp = two/real(m)
       do 30 j = 1, n
          do 20 i = 1, m
             fjac(i,j) = -temp
@@ -73,7 +73,7 @@ c
    40 continue
       do 60 j = 1, n
          do 50 i = 1, m
-            fjac(i,j) = dfloat(i)*dfloat(j)
+            fjac(i,j) = real(i)*real(j)
    50       continue
    60    continue
       go to 500
@@ -91,7 +91,7 @@ c
       if (nm1 .lt. 2) go to 120
       do 110 j = 2, nm1
          do 100 i = 2, mm1
-            fjac(i,j) = dfloat(i-1)*dfloat(j)
+            fjac(i,j) = real(i-1)*real(j)
   100       continue
   110    continue
   120 continue
@@ -155,8 +155,8 @@ c     bard function.
 c
   190 continue
       do 200 i = 1, 15
-         tmp1 = dfloat(i)
-         tmp2 = dfloat(16-i)
+         tmp1 = real(i)
+         tmp2 = real(16-i)
          tmp3 = tmp1
          if (i .gt. 8) tmp3 = tmp2
          tmp4 = (x(2)*tmp2 + x(3)*tmp3)**2
@@ -183,7 +183,7 @@ c     meyer function.
 c
   230 continue
       do 240 i = 1, 16
-         temp = five*dfloat(i) + c45 + x(3)
+         temp = five*real(i) + c45 + x(3)
          tmp1 = x(2)/temp
          tmp2 = dexp(tmp1)
          fjac(i,1) = tmp2
@@ -196,7 +196,7 @@ c     watson function.
 c
   250 continue
       do 280 i = 1, 29
-         div = dfloat(i)/c29
+         div = real(i)/c29
          s2 = zero
          dx = one
          do 260 j = 1, n
@@ -206,7 +206,7 @@ c
          temp = two*div*s2
          dx = one/div
          do 270 j = 1, n
-            fjac(i,j) = dx*(dfloat(j-1) - temp)
+            fjac(i,j) = dx*(real(j-1) - temp)
             dx = div*dx
   270       continue
   280    continue
@@ -224,7 +224,7 @@ c     box 3-dimensional function.
 c
   310 continue
       do 320 i = 1, m
-         temp = dfloat(i)
+         temp = real(i)
          tmp1 = temp/ten
          fjac(i,1) = -tmp1*dexp(-tmp1*x(1))
          fjac(i,2) = tmp1*dexp(-tmp1*x(2))
@@ -236,7 +236,7 @@ c     jennrich and sampson function.
 c
   330 continue
       do 340 i = 1, m
-         temp = dfloat(i)
+         temp = real(i)
          fjac(i,1) = -temp*dexp(temp*x(1))
          fjac(i,2) = -temp*dexp(temp*x(2))
   340    continue
@@ -246,7 +246,7 @@ c     brown and dennis function.
 c
   350 continue
       do 360 i = 1, m
-         temp = dfloat(i)/five
+         temp = real(i)/five
          ti = dsin(temp)
          tmp1 = x(1) + temp*x(2) - dexp(temp)
          tmp2 = x(3) + ti*x(4) - dcos(temp)
@@ -260,7 +260,7 @@ c
 c     chebyquad function.
 c
   370 continue
-      dx = one/dfloat(n)
+      dx = one/real(n)
       do 390 j = 1, n
          tmp1 = one
          tmp2 = two*x(j) - one
@@ -307,7 +307,7 @@ c     osborne 1 function.
 c
   460 continue
       do 470 i = 1, 33
-         temp = ten*dfloat(i-1)
+         temp = ten*real(i-1)
          tmp1 = dexp(-x(4)*temp)
          tmp2 = dexp(-x(5)*temp)
          fjac(i,1) = -one
@@ -322,7 +322,7 @@ c     osborne 2 function.
 c
   480 continue
       do 490 i = 1, 65
-         temp = dfloat(i-1)/ten
+         temp = real(i-1)/ten
          tmp1 = dexp(-x(5)*temp)
          tmp2 = dexp(-x(6)*(temp-x(9))**2)
          tmp3 = dexp(-x(7)*(temp-x(10))**2)

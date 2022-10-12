@@ -39,7 +39,6 @@ c     **********
       double precision c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14,
      *                 c15,c16,c17,five,h,half,one,seven,ten,three,
      *                 twenty,twntf,two,zero
-      double precision dfloat
       data zero,half,one,two,three,five,seven,ten,twenty,twntf
      *     /0.0d0,5.0d-1,1.0d0,2.0d0,3.0d0,5.0d0,7.0d0,1.0d1,2.0d1,
      *      2.5d1/
@@ -47,7 +46,6 @@ c     **********
      *     /1.2d0,2.5d-1,3.9d-1,4.15d-1,2.0d-2,4.0d3,2.5d2,3.0d-1,
      *      4.0d-1,1.5d0,1.0d-2,1.3d0,6.5d-1,7.0d-1,6.0d-1,4.5d0,
      *      5.5d0/
-      dfloat(ivar) = ivar
 c
 c     selection of initial point.
 c
@@ -153,9 +151,9 @@ c
 c     chebyquad function.
 c
   150 continue
-      h = one/dfloat(n+1)
+      h = one/real(n+1)
       do 160 j = 1, n
-         x(j) = dfloat(j)*h
+         x(j) = real(j)*h
   160    continue
       go to 210
 c

@@ -46,7 +46,7 @@ c     **********
      *                 c1pd6,d1,d2,eight,fifty,five,four,one,r,s1,s2,
      *                 s3,t,t1,t2,t3,ten,th,three,tpi,two,zero
       double precision fvec(50),y(15)
-      double precision dfloat
+      double precision real
       data zero,one,two,three,four,five,eight,ten,fifty
      *     /0.0d0,1.0d0,2.0d0,3.0d0,4.0d0,5.0d0,8.0d0,1.0d1,5.0d1/
       data c2pdm6,cp0001,cp1,cp2,cp25,cp5,c1p5,c2p25,c2p625,c3p5,c25,
@@ -59,7 +59,7 @@ c     **********
      *     /9.0d-4,4.4d-3,1.75d-2,5.4d-2,1.295d-1,2.42d-1,3.521d-1,
      *      3.989d-1,3.521d-1,2.42d-1,1.295d-1,5.4d-2,1.75d-2,4.4d-3,
      *      9.0d-4/
-      dfloat(ivar) = ivar
+      real(ivar) = ivar
 c
 c     function routine selector.
 c
@@ -84,7 +84,7 @@ c
    20 continue
       f = zero
       do 30 i = 1, 13
-         d1 = dfloat(i)/ten
+         d1 = real(i)/ten
          d2 = dexp(-d1) - five*dexp(-ten*d1) + three*dexp(-four*d1)
          s1 = dexp(-d1*x(1))
          s2 = dexp(-d1*x(2))
@@ -99,7 +99,7 @@ c
    40 continue
       f = zero
       do 50 i = 1, 15
-         d1 = cp5*dfloat(i-1)
+         d1 = cp5*real(i-1)
          d2 = c3p5 - d1 - x(3)
          arg = -cp5*x(2)*d2**2
          r = dexp(arg)
@@ -123,7 +123,7 @@ c
    70 continue
       f = zero
       do 80 i = 1, 10
-         d1 = dfloat(i)
+         d1 = real(i)
          d2 = d1/ten
          s1 = dexp(-d2*x(1))
          s2 = dexp(-d2*x(2))
@@ -139,7 +139,7 @@ c
       t1 = zero
       t2 = zero
       do 100 j = 1, n
-         t1 = t1 + dfloat(j)*(x(j) - one)
+         t1 = t1 + real(j)*(x(j) - one)
          t2 = t2 + (x(j) - one)**2
   100    continue
       f = t2 + t1**2*(one + t1**2)
@@ -150,11 +150,11 @@ c
   110 continue
       f = zero
       do 140 i = 1, 29
-         d1 = dfloat(i)/c29
+         d1 = real(i)/c29
          s1 = zero
          d2 = one
          do 120 j = 2, n
-            s1 = s1 + dfloat(j-1)*d2*x(j)
+            s1 = s1 + real(j-1)*d2*x(j)
             d2 = d1*d2
   120       continue
          s2 = zero
@@ -191,7 +191,7 @@ c
       d1 = dexp(cp1)
       d2 = one
       do 190 j = 1, n
-         t1 = t1 + dfloat(n-j+1)*x(j)**2
+         t1 = t1 + real(n-j+1)*x(j)**2
          s1 = dexp(x(j)/ten)
          if (j .eq. 1) go to 180
          s3 = s1 + s2 - d2*(d1 + one)
@@ -218,7 +218,7 @@ c
   210 continue
       f = zero
       do 220 i = 1, 20
-         d1 = dfloat(i)/five
+         d1 = real(i)/five
          d2 = dsin(d1)
          t1 = x(1) + d1*x(2) - dexp(d1)
          t2 = x(3) + d2*x(4) - dcos(d1)
@@ -233,7 +233,7 @@ c
       f = zero
       d1 = two/three
       do 240 i = 1, 99
-         arg = dfloat(i)/c100
+         arg = real(i)/c100
          r = (-fifty*dlog(arg))**d1 + c25 - x(2)
          t1 = dabs(r)**x(3)/x(1)
          t2 = dexp(-t1)
@@ -251,7 +251,7 @@ c
   260    continue
       f = zero
       do 270 j = 1, n
-         t = dfloat(n+j) - dsin(x(j)) - s1 - dfloat(j)*dcos(x(j))
+         t = real(n+j) - dsin(x(j)) - s1 - real(j)*dcos(x(j))
          f = f + t**2
   270    continue
       go to 390
@@ -326,11 +326,11 @@ c
   360       continue
   370    continue
       f = zero
-      d1 = one/dfloat(n)
+      d1 = one/real(n)
       iev = -1
       do 380 i = 1, n
          t = d1*fvec(i)
-         if (iev .gt. 0) t = t + one/(dfloat(i)**2 - one)
+         if (iev .gt. 0) t = t + one/(real(i)**2 - one)
          f = f + t**2
          iev = -iev
   380    continue

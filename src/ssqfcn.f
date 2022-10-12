@@ -49,7 +49,6 @@ c     **********
      *                 s1,s2,temp,ten,ti,tmp1,tmp2,tmp3,tmp4,tpi,two,
      *                 zero,zp25,zp5
       double precision v(11),y1(15),y2(11),y3(16),y4(33),y5(65)
-      double precision real
       data zero,zp25,zp5,one,two,five,eight,ten,c13,c14,c29,c45
      *     /0.0d0,2.5d-1,5.0d-1,1.0d0,2.0d0,5.0d0,8.0d0,1.0d1,1.3d1,
      *      1.4d1,2.9d1,4.5d1/
@@ -96,7 +95,6 @@ c     **********
      *      6.32d-1,5.91d-1,5.59d-1,5.97d-1,6.25d-1,7.39d-1,7.1d-1,
      *      7.29d-1,7.2d-1,6.36d-1,5.81d-1,4.28d-1,2.92d-1,1.62d-1,
      *      9.8d-2,5.4d-2/
-      real(ivar) = ivar
 c
 c     function routine selector.
 c

@@ -42,7 +42,6 @@ c     **********
      *                 four,one,r,s1,s2,s3,t,t1,t2,t3,ten,th,three,
      *                 tpi,twenty,two,zero
       double precision fvec(50),y(15)
-      double precision real
       data zero,one,two,three,four,five,eight,ten,twenty,fifty
      *     /0.0d0,1.0d0,2.0d0,3.0d0,4.0d0,5.0d0,8.0d0,1.0d1,2.0d1,
      *      5.0d1/
@@ -57,7 +56,6 @@ c     **********
      *     /9.0d-4,4.4d-3,1.75d-2,5.4d-2,1.295d-1,2.42d-1,3.521d-1,
      *      3.989d-1,3.521d-1,2.42d-1,1.295d-1,5.4d-2,1.75d-2,4.4d-3,
      *      9.0d-4/
-      real(ivar) = ivar
 c
 c     gradient routine selector.
 c

@@ -1,11 +1,12 @@
       recursive
-     *subroutine hybrj(fcn,n,x,fvec,fjac,ldfjac,xtol,maxfev,diag,mode,
+     *subroutine hybrj(n,x,fvec,fjac,ldfjac,xtol,maxfev,diag,mode,
      *                 factor,nprint,info,nfev,njev,r,lr,qtf,wa1,wa2,
      *                 wa3,wa4)
       integer n,ldfjac,maxfev,mode,nprint,info,nfev,njev,lr
       double precision xtol,factor
       double precision x(n),fvec(n),fjac(ldfjac,n),diag(n),r(lr),
      *                 qtf(n),wa1(n),wa2(n),wa3(n),wa4(n)
+      external fcn
 c     **********
 c
 c     subroutine hybrj
@@ -155,7 +156,7 @@ c     **********
       double precision actred,delta,epsmch,fnorm,fnorm1,one,pnorm,
      *                 prered,p1,p5,p001,p0001,ratio,sum,temp,xnorm,
      *                 zero
-      double precision dpmpar,enorm
+      external dpmpar,enorm
       data one,p1,p5,p001,p0001,zero
      *     /1.0d0,1.0d-1,5.0d-1,1.0d-3,1.0d-4,0.0d0/
 c

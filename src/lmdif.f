@@ -1,5 +1,5 @@
       recursive
-     *subroutine lmdif(fcn,m,n,x,fvec,ftol,xtol,gtol,maxfev,epsfcn,
+     *subroutine lmdif(m,n,x,fvec,ftol,xtol,gtol,maxfev,epsfcn,
      *                 diag,mode,factor,nprint,info,nfev,fjac,ldfjac,
      *                 ipvt,qtf,wa1,wa2,wa3,wa4)
       integer m,n,maxfev,mode,nprint,info,nfev,ldfjac
@@ -192,7 +192,7 @@ c     **********
       double precision actred,delta,dirder,epsmch,fnorm,fnorm1,gnorm,
      *                 one,par,pnorm,prered,p1,p5,p25,p75,p0001,ratio,
      *                 sum,temp,temp1,temp2,xnorm,zero
-      double precision dpmpar,enorm
+      external dpmpar,enorm
       data one,p1,p5,p25,p75,p0001,zero
      *     /1.0d0,1.0d-1,5.0d-1,2.5d-1,7.5d-1,1.0d-4,0.0d0/
 c
@@ -219,7 +219,7 @@ c     evaluate the function at the starting point
 c     and calculate its norm.
 c
       iflag = 1
-      call fcn(m,n,x,fvec,iflag)
+      !call fcn(m,n,x,fvec,iflag)
       nfev = 1
       if (iflag .lt. 0) go to 300
       fnorm = enorm(m,fvec)
@@ -244,7 +244,7 @@ c        if requested, call fcn to enable printing of iterates.
 c
          if (nprint .le. 0) go to 40
          iflag = 0
-         if (mod(iter-1,nprint) .eq. 0) call fcn(m,n,x,fvec,iflag)
+         !if (mod(iter-1,nprint) .eq. 0) call fcn(m,n,x,fvec,iflag)
          if (iflag .lt. 0) go to 300
    40    continue
 c
@@ -349,7 +349,7 @@ c
 c           evaluate the function at x + p and calculate its norm.
 c
             iflag = 1
-            call fcn(m,n,wa2,wa4,iflag)
+            !call fcn(m,n,wa2,wa4,iflag)
             nfev = nfev + 1
             if (iflag .lt. 0) go to 300
             fnorm1 = enorm(m,wa4)
@@ -447,7 +447,7 @@ c     termination, either normal or user imposed.
 c
       if (iflag .lt. 0) info = iflag
       iflag = 0
-      if (nprint .gt. 0) call fcn(m,n,x,fvec,iflag)
+      !if (nprint .gt. 0) call fcn(m,n,x,fvec,iflag)
       return
 c
 c     last card of subroutine lmdif.

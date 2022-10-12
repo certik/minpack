@@ -103,7 +103,7 @@ c     **********
       integer i,iter,j,jm1,jp1,k,l,nsing
       double precision dxnorm,dwarf,fp,gnorm,parc,parl,paru,p1,p001,
      *                 sum,temp,zero
-      double precision dpmpar,enorm
+      external dpmpar, enorm
       data p1,p001,zero /1.0d-1,1.0d-3,0.0d0/
 c
 c     dwarf is the smallest positive magnitude.

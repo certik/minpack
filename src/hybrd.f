@@ -169,7 +169,7 @@ c     **********
       double precision actred,delta,epsmch,fnorm,fnorm1,one,pnorm,
      *                 prered,p1,p5,p001,p0001,ratio,sum,temp,xnorm,
      *                 zero
-      double precision dpmpar,enorm
+      external dpmpar,enorm
       data one,p1,p5,p001,p0001,zero
      *     /1.0d0,1.0d-1,5.0d-1,1.0d-3,1.0d-4,0.0d0/
 c

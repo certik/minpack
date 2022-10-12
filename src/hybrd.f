@@ -6,7 +6,7 @@
       double precision xtol,epsfcn,factor
       double precision x(n),fvec(n),diag(n),fjac(ldfjac,n),r(lr),
      *                 qtf(n),wa1(n),wa2(n),wa3(n),wa4(n)
-      external fcn
+      external fcn, fdjac1
 c     **********
 c
 c     subroutine hybrd
@@ -223,8 +223,8 @@ c
 c        calculate the jacobian matrix.
 c
          iflag = 2
-         call fdjac1(fcn,n,x,fvec,fjac,ldfjac,iflag,ml,mu,epsfcn,wa1,
-     *               wa2)
+         !call fdjac1(fcn,n,x,fvec,fjac,ldfjac,iflag,ml,mu,epsfcn,wa1,
+      !*               wa2)
          nfev = nfev + msum
          if (iflag .lt. 0) go to 300
 c

@@ -40,13 +40,11 @@ c     **********
       double precision c1,c2,c3,c4,c5,c6,c7,c8,c9,eight,five,h,one,
      *                 prod,sum,sum1,sum2,temp,temp1,temp2,ten,three,
      *                 ti,tj,tk,tpi,two,zero
-      double precision real
       data zero,one,two,three,five,eight,ten
      *     /0.0d0,1.0d0,2.0d0,3.0d0,5.0d0,8.0d0,1.0d1/
       data c1,c2,c3,c4,c5,c6,c7,c8,c9
      *     /1.0d4,1.0001d0,2.0d2,2.02d1,1.98d1,1.8d2,2.5d-1,5.0d-1,
      *      2.9d1/
-      real(ivar) = ivar
 c
 c     problem selector.
 c

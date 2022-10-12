@@ -86,7 +86,7 @@ c
 c     **********
       integer i,j
       double precision eps,epsf,epslog,epsmch,factor,one,temp,zero
-      double precision dpmpar
+      external dpmpar
       data factor,one,zero /1.0d2,1.0d0,0.0d0/
 c
 c     epsmch is the machine precision.

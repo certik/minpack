@@ -74,7 +74,7 @@ c     **********
       integer i,j,jj,l,nmj,nm1
       double precision cos,cotan,giant,one,p5,p25,sin,tan,tau,temp,
      *                 zero
-      double precision dpmpar
+      external dpmpar
       data one,p5,p25,zero /1.0d0,5.0d-1,2.5d-1,0.0d0/
 c
 c     giant is the largest magnitude.

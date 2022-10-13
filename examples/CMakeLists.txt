@@ -20,3 +20,17 @@ add_test(example_lmdif1 example_lmdif1)
 add_executable(example_primes example_primes.f90)
 target_link_libraries(example_primes minpack)
 add_test(example_primes example_primes)
+
+set(SRC_EXAMPLES
+    example_hybrd.f90
+    example_hybrd1.f90
+    example_lmder1.f90
+    example_lmdif1.f90
+    example_primes.f90
+)
+
+if (CMAKE_Fortran_COMPILER_ID STREQUAL "GNU")
+else()
+    set_source_files_properties(${SRC_EXAMPLES} PROPERTIES COMPILE_OPTIONS
+        "--rtlib")
+endif()

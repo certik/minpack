@@ -45,7 +45,7 @@ program example_hybrd
     ! which we need to link
     print *, dabs(3.0)
 
-    call hybrd(fcn, n, x, fvec, xtol, maxfev, ml, mu, epsfcn, diag, &
+    call hybrd(n, x, fvec, xtol, maxfev, ml, mu, epsfcn, diag, &
                mode, factor, nprint, info, nfev, fjac, ldfjac, &
                r, lr, qtf, wa1, wa2, wa3, wa4)
     fnorm = enorm(n, fvec)

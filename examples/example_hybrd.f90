@@ -43,7 +43,7 @@ program example_hybrd
 
     ! FIXME: This is to trigger LFortran to load the runtime library for this function,
     ! which we need to link
-    print *, dabs(3.0)
+    print *, dabs(3.0_8)
 
     call hybrd(n, x, fvec, xtol, maxfev, ml, mu, epsfcn, diag, &
                mode, factor, nprint, info, nfev, fjac, ldfjac, &

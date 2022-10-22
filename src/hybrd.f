@@ -176,6 +176,7 @@ c
 c     epsmch is the machine precision.
 c
       epsmch = dpmpar(1)
+      print *, "OK"
 c
       info = 0
       iflag = 0
@@ -453,6 +454,7 @@ c
       if (iflag .lt. 0) info = iflag
       iflag = 0
       if (nprint .gt. 0) call fcn(n,x,fvec,iflag)
+      print *, "Done"
       return
 c
 c     last card of subroutine hybrd.

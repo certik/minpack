@@ -105,6 +105,9 @@ contains
             if (k /= n) temp2 = x(k + 1)
             fvec(k) = temp - temp1 - two*temp2 + one
         end do
+        print *, "FCN"
+        print *, x
+        print *, fvec
         return
 
     end subroutine fcn

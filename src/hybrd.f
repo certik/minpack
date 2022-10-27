@@ -1,12 +1,12 @@
       recursive
-     *subroutine hybrd(fcn,n,x,fvec,xtol,maxfev,ml,mu,epsfcn,diag,
+     *subroutine hybrd(n,x,fvec,xtol,maxfev,ml,mu,epsfcn,diag,
      *                 mode,factor,nprint,info,nfev,fjac,ldfjac,r,lr,
      *                 qtf,wa1,wa2,wa3,wa4)
       integer n,maxfev,ml,mu,mode,nprint,info,nfev,ldfjac,lr
       double precision xtol,epsfcn,factor
       double precision x(n),fvec(n),diag(n),fjac(ldfjac,n),r(lr),
      *                 qtf(n),wa1(n),wa2(n),wa3(n),wa4(n)
-      external fcn
+      !external fcn
 c     **********
 c
 c     subroutine hybrd
@@ -197,7 +197,7 @@ c     evaluate the function at the starting point
 c     and calculate its norm.
 c
       iflag = 1
-      call fcn(n,x,fvec,iflag)
+      !call fcn(n,x,fvec,iflag)
       nfev = 1
       if (iflag .lt. 0) go to 300
       fnorm = enorm(n,fvec)
@@ -223,8 +223,8 @@ c
 c        calculate the jacobian matrix.
 c
          iflag = 2
-         call fdjac1(fcn,n,x,fvec,fjac,ldfjac,iflag,ml,mu,epsfcn,wa1,
-     *               wa2)
+!         call fdjac1(fcn,n,x,fvec,fjac,ldfjac,iflag,ml,mu,epsfcn,wa1,
+!     *               wa2)
          nfev = nfev + msum
          if (iflag .lt. 0) go to 300
 c
@@ -308,7 +308,7 @@ c           if requested, call fcn to enable printing of iterates.
 c
             if (nprint .le. 0) go to 190
             iflag = 0
-            if (mod(iter-1,nprint) .eq. 0) call fcn(n,x,fvec,iflag)
+!            if (mod(iter-1,nprint) .eq. 0) call fcn(n,x,fvec,iflag)
             if (iflag .lt. 0) go to 300
   190       continue
 c
@@ -332,7 +332,7 @@ c
 c           evaluate the function at x + p and calculate its norm.
 c
             iflag = 1
-            call fcn(n,wa2,wa4,iflag)
+!            call fcn(n,wa2,wa4,iflag)
             nfev = nfev + 1
             if (iflag .lt. 0) go to 300
             fnorm1 = enorm(n,wa4)
@@ -453,7 +453,7 @@ c     termination, either normal or user imposed.
 c
       if (iflag .lt. 0) info = iflag
       iflag = 0
-      if (nprint .gt. 0) call fcn(n,x,fvec,iflag)
+!      if (nprint .gt. 0) call fcn(n,x,fvec,iflag)
       print *, "Done"
       return
 c

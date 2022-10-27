@@ -172,11 +172,11 @@ c     **********
       double precision dpmpar,enorm
       data one,p1,p5,p001,p0001,zero
      *     /1.0d0,1.0d-1,5.0d-1,1.0d-3,1.0d-4,0.0d0/
+      print *, "OK"
 c
 c     epsmch is the machine precision.
 c
       epsmch = dpmpar(1)
-      print *, "OK"
 c
       info = 0
       iflag = 0

@@ -106,8 +106,8 @@ contains
             fvec(k) = temp - temp1 - two*temp2 + one
         end do
         print *, "FCN"
-        print *, x
-        print *, fvec
+        print *, x(1), x(2), x(3)
+        print *, fvec(1), fvec(2), fvec(3)
         return
 
     end subroutine fcn

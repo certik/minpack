@@ -7,10 +7,12 @@ program example_hybrd
 
     use minpack, only: hybrd, enorm, dpmpar
     implicit none
+    integer, parameter :: dp = kind(0.d0)
     integer j, n, maxfev, ml, mu, mode, nprint, info, nfev, ldfjac, lr, nwrite
     double precision xtol, epsfcn, factor, fnorm
     double precision x(9), fvec(9), diag(9), fjac(9, 9), r(45), qtf(9), &
         wa1(9), wa2(9), wa3(9), wa4(9)
+    real(dp) :: err, eps
 
     !> Logical output unit is assumed to be number 6.
     data nwrite/6/
@@ -53,6 +55,15 @@ program example_hybrd
     print *, -0.5706545D+00, -0.6816283D+00, -0.7017325D+00, &
              -0.7042129D+00, -0.7013690D+00, -0.6918656D+00, &
              -0.6657920D+00, -0.5960342D+00, -0.4164121D+00
+
+    err = abs((fnorm - 1.1926358347598092E-008_dp)/fnorm)
+    eps = 2.2e-16_dp ! epsilon(1._dp)
+    print *, "fnorm error: ", err
+    if (err > eps) error stop
+    print *, "sum(x) = ", sum2(x)
+    err = abs(sum2(x) - (-5.7297012139802952_dp))
+    print *, "sum(x) error: ", err
+    if (err > eps) error stop
 
 1000 format(5x, "FINAL L2 NORM OF THE RESIDUALS", d15.7// &
            5x, "NUMBER OF FUNCTION EVALUATIONS", i10// &
@@ -104,5 +115,14 @@ contains
         return
 
     end subroutine fcn
+
+    real(dp) function sum2(x) result(r)
+    real(dp), intent(in) :: x(:)
+    integer :: i
+    r = 0
+    do i = 1, size(x)
+        r = r + x(i)
+    end do
+    end function
 
 end program example_hybrd

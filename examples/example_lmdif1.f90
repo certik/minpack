@@ -40,6 +40,7 @@ integer :: info, m, n
 real(dp) :: tol, x(3), fvec(15)
 integer :: iwa(size(x))
 real(dp), allocatable :: wa(:)
+real(dp) :: eps, err
 
 ! The following starting values provide a rough fit.
 x = [1._dp, 1._dp, 1._dp]
@@ -57,4 +58,22 @@ print 1000, enorm(size(fvec), fvec), info, x
             5x, 'EXIT PARAMETER', 16x, i10              // &
             5x, 'FINAL APPROXIMATE SOLUTION'            // &
             5x, 3d15.7)
+
+eps = 2.2e-16_dp ! epsilon(1._dp)
+print *, "sum(x) = ", sum2(x)
+err = abs(sum2(x) - (3.5591418673097985_dp))
+print *, "sum(x) error: ", err
+if (err > eps) error stop
+
+contains
+
+    real(dp) function sum2(x) result(r)
+    real(dp), intent(in) :: x(:)
+    integer :: i
+    r = 0
+    do i = 1, size(x)
+        r = r + x(i)
+    end do
+    end function
+
 end program

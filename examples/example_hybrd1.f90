@@ -8,9 +8,11 @@ program example_hybrd1
 
     use minpack, only: hybrd1, dpmpar, enorm
     implicit none
+    integer, parameter :: dp = kind(0.d0)
     integer j, n, info, lwa, nwrite
     double precision tol, fnorm
     double precision x(9), fvec(9), wa(180)
+    real(dp) :: eps, err
 
     !> Logical output unit is assumed to be number 6.
     data nwrite/6/
@@ -32,6 +34,15 @@ program example_hybrd1
     call hybrd1(fcn, n, x, fvec, tol, info, wa, lwa)
     fnorm = enorm(n, fvec)
     write (nwrite, 1000) fnorm, info, (x(j), j=1, n)
+
+    err = abs((fnorm - 1.1926358347598092E-008_dp)/fnorm)
+    eps = 2.2e-16_dp ! epsilon(1._dp)
+    print *, "fnorm error: ", err
+    if (err > eps) error stop
+    print *, "sum(x) = ", sum2(x)
+    err = abs(sum2(x) - (-5.7297012139802952_dp))
+    print *, "sum(x) error: ", err
+    if (err > eps) error stop
 
 1000 format(5x, "FINAL L2 NORM OF THE RESIDUALS", d15.7// &
            5x, "EXIT PARAMETER", 16x, i10// &
@@ -74,5 +85,14 @@ contains
         end do
 
     end subroutine fcn
+
+    real(dp) function sum2(x) result(r)
+    real(dp), intent(in) :: x(:)
+    integer :: i
+    r = 0
+    do i = 1, size(x)
+        r = r + x(i)
+    end do
+    end function
 
 end program example_hybrd1

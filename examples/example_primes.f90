@@ -40,7 +40,7 @@ subroutine fcn(m, n, x, fvec, iflag)
 integer, intent(in) :: m, n, iflag
 real(dp), intent(in) :: x(n)
 real(dp), intent(out) :: fvec(m)
-real(dp) :: y(m), data_y2(m)
+real(dp) :: y(m)
 real(dp) :: a, b, c
 integer :: i
 integer, parameter :: y2(*) = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, &

@@ -43,14 +43,17 @@ real(dp), intent(in) :: x(n)
 real(dp), intent(out) :: fvec(m)
 real(dp) :: y(m)
 real(dp) :: a, b, c
+integer :: i
 ! Suppress compiler warning:
 fvec(1) = iflag
 
 a = x(1)
 b = x(2)
 c = x(3)
-y = a*data_x*log(b + c*data_x)
-fvec = data_y - y
+do i = 1, m
+    y(i) = a*data_x(i)*log(b + c*data_x(i))
+    fvec(i) = data_y(i) - y(i)
+end do
 end subroutine
 
 end subroutine

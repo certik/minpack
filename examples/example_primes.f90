@@ -1,22 +1,27 @@
-module types
-implicit none
-private
-public dp
+program example_primes
 
-integer, parameter :: dp=kind(0d0)
-
-end module
-
-module find_fit_module
-
-! This module contains a general function find_fit() for a nonlinear least
-! squares fitting. The function can fit any nonlinear expression to any data.
+! Find a nonlinear fit of the form a*x*log(b + c*x) to a list of primes.
 
 use minpack, only: lmdif1
-use types, only: dp
 implicit none
-private
-public find_fit
+
+integer, parameter :: dp=kind(0d0)
+real(dp) :: pars(3)
+real(dp) :: err, eps
+pars = [1._dp, 1._dp, 1._dp]
+call find_fit(20, pars)
+print *, pars
+
+eps = 2.2e-16_dp ! epsilon(1._dp)
+err = abs(pars(1) - (1.4207732518240344_dp))
+print *, "pars(1) error: ", err
+if (err > eps) error stop
+err = abs(pars(2) - (1.6556110935635728_dp))
+print *, "pars(2) error: ", err
+if (err > eps) error stop
+err = abs(pars(3) - (0.53462503550719431_dp))
+print *, "pars(3) error: ", err
+if (err > eps) error stop
 
 contains
 
@@ -33,8 +38,7 @@ n = size(pars)
 allocate(wa(m*n + 5*n + m))
 call lmdif1(fcn, m, n, pars, fvec, tol, info, iwa, wa, size(wa))
 if (info /= 1) stop "failed to converge"
-
-contains
+end subroutine
 
 subroutine fcn(m, n, x, fvec, iflag)
 integer, intent(in) :: m, n, iflag
@@ -60,35 +64,5 @@ do i = 1, m
     fvec(i) = y2(i) - y(i)
 end do
 end subroutine
-
-end subroutine
-
-end module
-
-
-program example_primes
-
-! Find a nonlinear fit of the form a*x*log(b + c*x) to a list of primes.
-
-use find_fit_module, only: find_fit
-use types, only: dp
-implicit none
-
-real(dp) :: pars(3)
-real(dp) :: err, eps
-pars = [1._dp, 1._dp, 1._dp]
-call find_fit(20, pars)
-print *, pars
-
-eps = 2.2e-16_dp ! epsilon(1._dp)
-err = abs(pars(1) - (1.4207732518240344_dp))
-print *, "pars(1) error: ", err
-if (err > eps) error stop
-err = abs(pars(2) - (1.6556110935635728_dp))
-print *, "pars(2) error: ", err
-if (err > eps) error stop
-err = abs(pars(3) - (0.53462503550719431_dp))
-print *, "pars(3) error: ", err
-if (err > eps) error stop
 
 end program

@@ -6,10 +6,21 @@ use minpack, only: lmdif1
 implicit none
 
 integer, parameter :: dp=kind(0d0)
+integer, parameter ::m = 20
 real(dp) :: pars(3)
 real(dp) :: err, eps
+real(dp) :: tol, fvec(m)
+integer :: iwa(size(pars)), info, n
+real(dp), allocatable :: wa(:)
+
 pars = [1._dp, 1._dp, 1._dp]
-call find_fit(20, pars)
+
+tol = sqrt(epsilon(1._dp))
+n = size(pars)
+allocate(wa(m*n + 5*n + m))
+call lmdif1(fcn2, m, n, pars, fvec, tol, info, iwa, wa, size(wa))
+if (info /= 1) stop "failed to converge"
+
 print *, pars
 
 eps = 2.2e-16_dp ! epsilon(1._dp)
@@ -24,21 +35,6 @@ print *, "pars(3) error: ", err
 if (err > eps) error stop
 
 contains
-
-subroutine find_fit(m, pars)
-integer, intent(in) :: m
-real(dp), intent(inout) :: pars(:)
-
-real(dp) :: tol, fvec(m)
-integer :: iwa(size(pars)), info, n
-real(dp), allocatable :: wa(:)
-
-tol = sqrt(epsilon(1._dp))
-n = size(pars)
-allocate(wa(m*n + 5*n + m))
-call lmdif1(fcn2, m, n, pars, fvec, tol, info, iwa, wa, size(wa))
-if (info /= 1) stop "failed to converge"
-end subroutine
 
 subroutine fcn2(m, n, x, fvec, iflag)
 integer, intent(in) :: m, n, iflag

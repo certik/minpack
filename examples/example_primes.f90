@@ -36,11 +36,11 @@ real(dp), allocatable :: wa(:)
 tol = sqrt(epsilon(1._dp))
 n = size(pars)
 allocate(wa(m*n + 5*n + m))
-call lmdif1(fcn, m, n, pars, fvec, tol, info, iwa, wa, size(wa))
+call lmdif1(fcn2, m, n, pars, fvec, tol, info, iwa, wa, size(wa))
 if (info /= 1) stop "failed to converge"
 end subroutine
 
-subroutine fcn(m, n, x, fvec, iflag)
+subroutine fcn2(m, n, x, fvec, iflag)
 integer, intent(in) :: m, n, iflag
 real(dp), intent(in) :: x(n)
 real(dp), intent(out) :: fvec(m)

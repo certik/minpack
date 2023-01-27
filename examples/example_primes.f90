@@ -41,18 +41,19 @@ subroutine fcn(m, n, x, fvec, iflag)
 integer, intent(in) :: m, n, iflag
 real(dp), intent(in) :: x(n)
 real(dp), intent(out) :: fvec(m)
-real(dp) :: y(m)
+real(dp) :: y(m), data_y2(m)
 real(dp) :: a, b, c
 integer :: i
 ! Suppress compiler warning:
 fvec(1) = iflag
+data_y2 = data_y
 
 a = x(1)
 b = x(2)
 c = x(3)
 do i = 1, m
-    y(i) = a*data_x(i)*log(b + c*data_x(i))
-    fvec(i) = data_y(i) - y(i)
+!    y(i) = a*data_x(i)*log(b + c*data_x(i))
+    fvec(i) = data_y2(i) - y(i)
 end do
 end subroutine
 

@@ -75,12 +75,24 @@ implicit none
 real(dp) :: pars(3)
 integer, parameter :: y2(*) = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, &
     37, 41, 43, 47, 53, 59, 61, 67, 71]
-real(dp) :: y(20)
+real(dp) :: y(20), err, eps
 integer :: i
 y = real(y2, dp)
 pars = [1._dp, 1._dp, 1._dp]
 call find_fit([(real(i, dp), i=1,size(y))], y, expression, pars)
 print *, pars
+
+eps = 2.2e-16_dp ! epsilon(1._dp)
+err = abs(pars(1) - (1.4207732518240344_dp))
+print *, "pars(1) error: ", err
+if (err > eps) error stop
+err = abs(pars(2) - (1.6556110935635728_dp))
+print *, "pars(2) error: ", err
+if (err > eps) error stop
+err = abs(pars(3) - (0.53462503550719431_dp))
+print *, "pars(3) error: ", err
+if (err > eps) error stop
+
 
 contains
 

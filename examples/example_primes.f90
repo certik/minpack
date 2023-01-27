@@ -58,10 +58,10 @@ real(dp) :: y(m)
 real(dp) :: data_x2(m), data_y2(m)
 ! Suppress compiler warning:
 fvec(1) = iflag
-data_x2 = data_x
-data_y2 = data_y
-call expr(data_x2, x, y)
-fvec = data_y2 - y
+!data_x2 = data_x
+!data_y2 = data_y
+!call expr(data_x2, x, y)
+!fvec = data_y2 - y
 end subroutine
 
 end subroutine

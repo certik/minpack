@@ -54,9 +54,16 @@ subroutine fcn(m, n, x, fvec, iflag)
 integer, intent(in) :: m, n, iflag
 real(dp), intent(in) :: x(n)
 real(dp), intent(out) :: fvec(m)
+real(dp) :: y(size(data_x))
+real(dp) :: a, b, c
 ! Suppress compiler warning:
 fvec(1) = iflag
-fvec = data_y - expr(data_x, x)
+
+a = x(1)
+b = x(2)
+c = x(3)
+y = a*data_x*log(b + c*data_x)
+fvec = data_y - y
 end subroutine
 
 end subroutine

@@ -20,19 +20,16 @@ public find_fit
 
 contains
 
-subroutine find_fit(data_x, data_y, pars)
-real(dp), intent(in) :: data_x(:), data_y(:)
+subroutine find_fit(m, pars)
+integer, intent(in) :: m
 real(dp), intent(inout) :: pars(:)
 
-real(dp) :: tol, fvec(size(data_x))
-integer :: iwa(size(pars)), info, m, n
+real(dp) :: tol, fvec(m)
+integer :: iwa(size(pars)), info, n
 real(dp), allocatable :: wa(:)
-real(dp) :: data_y3(size(data_y))
 
 tol = sqrt(epsilon(1._dp))
-m = size(fvec)
 n = size(pars)
-data_y3 = data_y
 allocate(wa(m*n + 5*n + m))
 call lmdif1(fcn, m, n, pars, fvec, tol, info, iwa, wa, size(wa))
 if (info /= 1) stop "failed to converge"
@@ -49,7 +46,7 @@ integer :: i
 integer, parameter :: y2(*) = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, &
     37, 41, 43, 47, 53, 59, 61, 67, 71]
 real(dp) :: x2(20)
-do i = 1, size(y)
+do i = 1, size(y2)
     x2(i) = i
 end do
 ! Suppress compiler warning:
@@ -78,16 +75,9 @@ use types, only: dp
 implicit none
 
 real(dp) :: pars(3)
-integer, parameter :: y2(*) = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, &
-    37, 41, 43, 47, 53, 59, 61, 67, 71]
-real(dp) :: x(20), y(20), err, eps
-integer :: i
-y = real(y2, dp)
+real(dp) :: err, eps
 pars = [1._dp, 1._dp, 1._dp]
-do i = 1, size(y)
-    x(i) = i
-end do
-call find_fit(x, y, pars)
+call find_fit(20, pars)
 print *, pars
 
 eps = 2.2e-16_dp ! epsilon(1._dp)

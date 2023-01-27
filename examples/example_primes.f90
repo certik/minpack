@@ -54,7 +54,7 @@ subroutine fcn(m, n, x, fvec, iflag)
 integer, intent(in) :: m, n, iflag
 real(dp), intent(in) :: x(n)
 real(dp), intent(out) :: fvec(m)
-real(dp) :: y(size(data_x))
+real(dp) :: y(m)
 real(dp) :: a, b, c
 ! Suppress compiler warning:
 fvec(1) = iflag

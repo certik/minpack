@@ -27,10 +27,12 @@ real(dp), intent(inout) :: pars(:)
 real(dp) :: tol, fvec(size(data_x))
 integer :: iwa(size(pars)), info, m, n
 real(dp), allocatable :: wa(:)
+real(dp) :: data_y3(size(data_y))
 
 tol = sqrt(epsilon(1._dp))
 m = size(fvec)
 n = size(pars)
+data_y3 = data_y
 allocate(wa(m*n + 5*n + m))
 call lmdif1(fcn, m, n, pars, fvec, tol, info, iwa, wa, size(wa))
 if (info /= 1) stop "failed to converge"
@@ -44,16 +46,21 @@ real(dp), intent(out) :: fvec(m)
 real(dp) :: y(m), data_y2(m)
 real(dp) :: a, b, c
 integer :: i
+integer, parameter :: y2(*) = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, &
+    37, 41, 43, 47, 53, 59, 61, 67, 71]
+real(dp) :: x2(20)
+do i = 1, size(y)
+    x2(i) = i
+end do
 ! Suppress compiler warning:
 fvec(1) = iflag
-data_y2 = data_y
 
 a = x(1)
 b = x(2)
 c = x(3)
 do i = 1, m
-!    y(i) = a*data_x(i)*log(b + c*data_x(i))
-    fvec(i) = data_y2(i) - y(i)
+    y(i) = a*x2(i)*log(b + c*x2(i))
+    fvec(i) = y2(i) - y(i)
 end do
 end subroutine
 

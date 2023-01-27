@@ -56,7 +56,7 @@ real(dp), intent(in) :: x(n)
 real(dp), intent(out) :: fvec(m)
 ! Suppress compiler warning:
 fvec(1) = iflag
-fvec = data_y - expr(data_x, x)
+!fvec = data_y - expr(data_x, x)
 end subroutine
 
 end subroutine
@@ -79,19 +79,19 @@ real(dp) :: y(20)
 integer :: i
 y = real(y2, dp)
 pars = [1._dp, 1._dp, 1._dp]
-call find_fit([(real(i, dp), i=1,size(y))], y, expression, pars)
+!call find_fit([(real(i, dp), i=1,size(y))], y, expression, pars)
 print *, pars
 
 contains
 
-function expression(x, pars) result(y)
-real(dp), intent(in) :: x(:), pars(:)
-real(dp) :: y(size(x))
-real(dp) :: a, b, c
-a = pars(1)
-b = pars(2)
-c = pars(3)
-y = a*x*log(b + c*x)
-end function
+!function expression(x, pars) result(y)
+!real(dp), intent(in) :: x(:), pars(:)
+!real(dp) :: y(size(x))
+!real(dp) :: a, b, c
+!a = pars(1)
+!b = pars(2)
+!c = pars(3)
+!y = a*x*log(b + c*x)
+!end function
 
 end program

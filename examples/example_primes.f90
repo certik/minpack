@@ -69,11 +69,14 @@ implicit none
 real(dp) :: pars(3)
 integer, parameter :: y2(*) = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, &
     37, 41, 43, 47, 53, 59, 61, 67, 71]
-real(dp) :: y(20), err, eps
+real(dp) :: x(20), y(20), err, eps
 integer :: i
 y = real(y2, dp)
 pars = [1._dp, 1._dp, 1._dp]
-call find_fit([(real(i, dp), i=1,size(y))], y, pars)
+do i = 1, size(y)
+    x(i) = i
+end do
+call find_fit(x, y, pars)
 print *, pars
 
 eps = 2.2e-16_dp ! epsilon(1._dp)

@@ -20,21 +20,8 @@ public find_fit
 
 contains
 
-subroutine find_fit(data_x, data_y, expr, pars)
-! Fits the (data_x, data_y) arrays with the function expr(x, pars).
-! The user can provide any nonlinear function 'expr' depending on any number of
-! parameters 'pars' and it must return the evaluated expression on the
-! array 'x'. The arrays 'data_x' and 'data_y' must have the same
-! length.
+subroutine find_fit(data_x, data_y, pars)
 real(dp), intent(in) :: data_x(:), data_y(:)
-interface
-    function expr(x, pars) result(y)
-    use types, only: dp
-    implicit none
-    real(dp), intent(in) :: x(:), pars(:)
-    real(dp) :: y(size(x))
-    end function
-end interface
 real(dp), intent(inout) :: pars(:)
 
 real(dp) :: tol, fvec(size(data_x))
@@ -86,7 +73,7 @@ real(dp) :: y(20), err, eps
 integer :: i
 y = real(y2, dp)
 pars = [1._dp, 1._dp, 1._dp]
-call find_fit([(real(i, dp), i=1,size(y))], y, expression, pars)
+call find_fit([(real(i, dp), i=1,size(y))], y, pars)
 print *, pars
 
 eps = 2.2e-16_dp ! epsilon(1._dp)
@@ -99,18 +86,5 @@ if (err > eps) error stop
 err = abs(pars(3) - (0.53462503550719431_dp))
 print *, "pars(3) error: ", err
 if (err > eps) error stop
-
-
-contains
-
-function expression(x, pars) result(y)
-real(dp), intent(in) :: x(:), pars(:)
-real(dp) :: y(size(x))
-real(dp) :: a, b, c
-a = pars(1)
-b = pars(2)
-c = pars(3)
-y = a*x*log(b + c*x)
-end function
 
 end program

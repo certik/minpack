@@ -73,9 +73,11 @@ use types, only: dp
 implicit none
 
 real(dp) :: pars(3)
-real(dp), parameter :: y(*) = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, &
+integer, parameter :: y2(*) = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, &
     37, 41, 43, 47, 53, 59, 61, 67, 71]
+real(dp) :: y(20)
 integer :: i
+y = real(y2, dp)
 pars = [1._dp, 1._dp, 1._dp]
 call find_fit([(real(i, dp), i=1,size(y))], y, expression, pars)
 print *, pars

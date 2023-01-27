@@ -28,12 +28,12 @@ subroutine find_fit(data_x, data_y, expr, pars)
 ! length.
 real(dp), intent(in) :: data_x(:), data_y(:)
 interface
-    function expr(x, pars) result(y)
+    subroutine expr(x, pars, y)
     use types, only: dp
     implicit none
     real(dp), intent(in) :: x(:), pars(:)
-    real(dp) :: y(size(x))
-    end function
+    real(dp), intent(out) :: y(:)
+    end subroutine
 end interface
 real(dp), intent(inout) :: pars(:)
 
@@ -54,9 +54,11 @@ subroutine fcn(m, n, x, fvec, iflag)
 integer, intent(in) :: m, n, iflag
 real(dp), intent(in) :: x(n)
 real(dp), intent(out) :: fvec(m)
+real(dp) :: y(size(data_x))
 ! Suppress compiler warning:
 fvec(1) = iflag
-!fvec = data_y - expr(data_x, x)
+call expr(data_x, x, y)
+fvec = data_y - y
 end subroutine
 
 end subroutine
@@ -79,19 +81,19 @@ real(dp) :: y(20)
 integer :: i
 y = real(y2, dp)
 pars = [1._dp, 1._dp, 1._dp]
-!call find_fit([(real(i, dp), i=1,size(y))], y, expression, pars)
+call find_fit([(real(i, dp), i=1,size(y))], y, expression, pars)
 print *, pars
 
 contains
 
-!function expression(x, pars) result(y)
-!real(dp), intent(in) :: x(:), pars(:)
-!real(dp) :: y(size(x))
-!real(dp) :: a, b, c
-!a = pars(1)
-!b = pars(2)
-!c = pars(3)
-!y = a*x*log(b + c*x)
-!end function
+subroutine expression(x, pars, y)
+real(dp), intent(in) :: x(:), pars(:)
+real(dp), intent(out) :: y(:)
+real(dp) :: a, b, c
+a = pars(1)
+b = pars(2)
+c = pars(3)
+y = a*x*log(b + c*x)
+end subroutine
 
 end program

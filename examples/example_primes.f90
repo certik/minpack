@@ -84,19 +84,19 @@ real(dp) :: y(20)
 integer :: i
 y = real(y2, dp)
 pars = [1._dp, 1._dp, 1._dp]
-call find_fit([(real(i, dp), i=1,size(y))], y, expression, pars)
+!call find_fit([(real(i, dp), i=1,size(y))], y, expression, pars)
 print *, pars
 
 contains
 
-subroutine expression(x, pars, y)
-real(dp), intent(in) :: x(:), pars(:)
-real(dp), intent(out) :: y(:)
-real(dp) :: a, b, c
-a = pars(1)
-b = pars(2)
-c = pars(3)
-y = a*x*log(b + c*x)
-end subroutine
+!subroutine expression(x, pars, y)
+!real(dp), intent(in) :: x(:), pars(:)
+!real(dp), intent(out) :: y(:)
+!real(dp) :: a, b, c
+!a = pars(1)
+!b = pars(2)
+!c = pars(3)
+!y = a*x*log(b + c*x)
+!end subroutine
 
 end program

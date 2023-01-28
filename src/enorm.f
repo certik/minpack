@@ -94,7 +94,7 @@ c
   100 continue
          if (s2 .eq. zero) go to 110
             if (s2 .ge. x3max)
-     *         enorm = (s2*(one+(x3max/s2)*(x3max*s3)))**(0.5_8)
+     *         enorm = dsqrt(s2*(one+(x3max/s2)*(x3max*s3)))
             if (s2 .lt. x3max)
      *         enorm = dsqrt(x3max*((s2/x3max)+(x3max*s3)))
             go to 120

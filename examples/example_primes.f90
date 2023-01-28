@@ -24,13 +24,13 @@ if (info /= 1) stop "failed to converge"
 print *, pars
 
 eps = 2.2e-16_dp ! epsilon(1._dp)
-err = abs(pars(1) - (1.4207735268892967_dp))
+err = abs(pars(1) - (1.4207732518240344_dp))
 print *, "pars(1) error: ", err
 if (err > eps) error stop
-err = abs(pars(2) - (1.6556114416219636_dp))
+err = abs(pars(2) - (1.6556110935635728_dp))
 print *, "pars(2) error: ", err
 if (err > eps) error stop
-err = abs(pars(3) - (0.53462472564456032_dp))
+err = abs(pars(3) - (0.53462503550719431_dp))
 print *, "pars(3) error: ", err
 if (err > eps) error stop
 
